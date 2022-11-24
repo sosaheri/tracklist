@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { validatorCreateItem } = require('../validators/tracks')
+const { validatorCreateItem, validatorGetItem } = require('../validators/tracks')
 const customHeader = require('../middleware/customHeader');
-const { getItems, getItem, createItem } = require('../controllers/tracks');
+const { getItems, getItem, createItem, updateItem, deleteItem } = require('../controllers/tracks');
 
 //version 1
 // router.get("/tracks", (req,res) => {
@@ -13,8 +13,10 @@ const { getItems, getItem, createItem } = require('../controllers/tracks');
 // })
 
 router.get("/", getItems);
-// router.get("/:id", getItem);
-router.post("/", validatorCreateItem , customHeader ,createItem);
+router.get("/:id",validatorGetItem , getItem); //para pasar mas variables seguir este ejemplo /:id/:var1/:var2
+router.put("/:id",validatorGetItem , validatorCreateItem , updateItem); 
+router.post("/", validatorCreateItem , customHeader ,createItem); //el customHeader es un middleware que revisa el header en este caso para saber si ejecuta o no la ruta
+router.delete("/:id",validatorGetItem , deleteItem); 
 
 
 module.exports = router;
