@@ -13,7 +13,6 @@ const getItems = async (req, res) => {
     }
 
 };
-
 const getItem = async (req, res) => {
     try {
         req = matchedData(req);
@@ -27,7 +26,6 @@ const getItem = async (req, res) => {
         handleHttpError(res, 'ERROR_GET_ITEM')
     }
 };
-
 const createItem = async (req, res) => {
     try {
         const body = matchedData(req);
@@ -41,7 +39,6 @@ const createItem = async (req, res) => {
     }
 
 };
-
 const updateItem = async (req, res) => {
     try {       
 
@@ -61,7 +58,7 @@ const deleteItem = async (req, res) => {
         req = matchedData(req);
         const {id} = req;
 
-        const data = await tracksModel.remove({_id:id});
+        const data = await tracksModel.delete({_id:id});
         res.send({data}); 
     } catch (e) {
         console.log(e);
